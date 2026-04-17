@@ -1,0 +1,203 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<style>
+    .home-container {
+        max-width: 960px;
+        margin: 52px auto;
+        padding: 0 24px;
+    }
+
+    .hero {
+        text-align: center;
+        margin-bottom: 52px;
+    }
+
+    .hero-icon {
+        font-size: 3rem;
+        margin-bottom: 12px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #1a1a2e;
+        margin-bottom: 10px;
+    }
+
+    .hero p {
+        font-size: 1.05rem;
+        color: #6b7280;
+        margin: 0;
+    }
+
+    .module-grid {
+        display: flex;
+        gap: 24px;
+    }
+
+    .module-card {
+        flex: 1;
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 2px 14px rgba(0,0,0,0.07);
+        padding: 32px 28px 28px 28px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        transition: transform 0.18s, box-shadow 0.18s;
+        border-top: 4px solid transparent;
+    }
+
+    .module-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 28px rgba(0,0,0,0.11);
+    }
+
+    .module-card.card-customers { border-top-color: #6366f1; }
+    .module-card.card-products  { border-top-color: #10b981; }
+    .module-card.card-orders    { border-top-color: #f59e0b; }
+
+    .module-icon {
+        font-size: 2rem;
+        margin-bottom: 16px;
+        width: 56px;
+        height: 56px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .icon-bg-purple { background: #ede9fe; }
+    .icon-bg-green  { background: #d1fae5; }
+    .icon-bg-amber  { background: #fef3c7; }
+
+    .module-card h3 {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 8px;
+    }
+
+    .module-card p {
+        font-size: 0.88rem;
+        color: #9ca3af;
+        margin-bottom: 24px;
+        flex: 1;
+    }
+
+    .btn-module {
+        padding: 9px 22px;
+        border-radius: 8px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+        transition: opacity 0.15s;
+    }
+
+    .btn-module:hover {
+        opacity: 0.85;
+        text-decoration: none;
+    }
+
+    .btn-purple { background: #6366f1; color: #fff; }
+    .btn-green  { background: #10b981; color: #fff; }
+    .btn-amber  { background: #f59e0b; color: #fff; }
+
+    .stats-bar {
+        display: flex;
+        gap: 16px;
+        margin-top: 36px;
+    }
+
+    .stat-tile {
+        flex: 1;
+        background: #f8fafc;
+        border: 1px solid #e9ecef;
+        border-radius: 10px;
+        padding: 16px 20px;
+        text-align: center;
+    }
+
+    .stat-tile .stat-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #9ca3af;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 6px;
+    }
+
+    .stat-tile .stat-value {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #374151;
+    }
+
+    @@media (max-width: 700px) {
+        .module-grid { flex-direction: column; }
+        .stats-bar   { flex-direction: column; }
+    }
+</style>
+
+<div class="home-container">
+
+    <!-- I used icons for good UI -->
+    <div class="hero">
+        <div class="hero-icon">🗂️</div>
+        <h1>Order Management System</h1>
+        <p>Manage customers, products, and orders from one place</p>
+    </div>
+
+    <!-- Module cards -->
+    <div class="module-grid">
+
+        <div class="module-card card-customers">
+            <div class="module-icon icon-bg-purple">👥</div>
+            <h3>Customers</h3>
+            <p>Add, edit, and manage customer records and contact information.</p>
+            <a href="/CustomerMvc" class="btn-module btn-purple">View Customers</a>
+        </div>
+
+        <div class="module-card card-products">
+            <div class="module-icon icon-bg-green">📦</div>
+            <h3>Products</h3>
+            <p>Manage your product catalogue, pricing, and stock levels.</p>
+            <a href="/ProductMvc" class="btn-module btn-green">View Products</a>
+        </div>
+
+        <div class="module-card card-orders">
+            <div class="module-icon icon-bg-amber">🧾</div>
+            <h3>Orders</h3>
+            <p>Create new orders, track history, and view order details.</p>
+            <a href="/OrderMvc" class="btn-module btn-amber">View Orders</a>
+        </div>
+
+    </div>
+
+    <!-- Quick actions bar -->
+    <div class="stats-bar">
+        <div class="stat-tile">
+            <div class="stat-label">Quick Action</div>
+            <div class="stat-value">
+                <a href="/CustomerMvc/Create" style="color:#6366f1; font-weight:600; text-decoration:none;">+ New Customer</a>
+            </div>
+        </div>
+        <div class="stat-tile">
+            <div class="stat-label">Quick Action</div>
+            <div class="stat-value">
+                <a href="/ProductMvc/Create" style="color:#10b981; font-weight:600; text-decoration:none;">+ New Product</a>
+            </div>
+        </div>
+        <div class="stat-tile">
+            <div class="stat-label">Quick Action</div>
+            <div class="stat-value">
+                <a href="/OrderMvc/Create" style="color:#f59e0b; font-weight:600; text-decoration:none;">+ New Order</a>
+            </div>
+        </div>
+    </div>
+
+</div>

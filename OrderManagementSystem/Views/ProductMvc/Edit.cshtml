@@ -1,0 +1,247 @@
+﻿@model OrderManagementSystem.Models.ViewModels.ProductViewModel
+
+@{
+    ViewBag.Title = "Edit Product";
+}
+
+<style>
+    .product-form-card {
+        max-width: 620px;
+        margin: 48px auto;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+        padding: 40px 48px 36px 48px;
+    }
+
+        .product-form-card h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 6px;
+            color: #1a1a2e;
+        }
+
+    .form-section-header {
+        border-bottom: 1px solid #f0f0f0;
+        padding-bottom: 14px;
+        margin-bottom: 28px;
+        margin-top: 8px;
+    }
+
+        .form-section-header h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 3px;
+            color: #333;
+        }
+
+        .form-section-header p {
+            font-size: 0.85rem;
+            color: #888;
+            margin: 0;
+        }
+
+    .fields-row {
+        display: flex;
+        gap: 20px;
+    }
+
+        .fields-row .field-group {
+            flex: 1;
+        }
+
+    .field-group {
+        margin-bottom: 22px;
+    }
+
+        .field-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #444;
+            margin-bottom: 7px;
+        }
+
+        .field-group .form-control {
+            height: 46px;
+            font-size: 0.97rem;
+            border-radius: 7px;
+            border: 1.5px solid #d1d5db;
+            padding: 10px 14px;
+            width: 100%;
+            box-sizing: border-box;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+            .field-group .form-control:focus {
+                border-color: #4a90d9;
+                box-shadow: 0 0 0 3px rgba(74,144,217,0.13);
+                outline: none;
+            }
+
+    .field-hint {
+        font-size: 0.78rem;
+        color: #aaa;
+        margin-top: 4px;
+    }
+
+    .field-error {
+        font-size: 0.8rem;
+        color: #dc3545;
+        margin-top: 4px;
+        display: block;
+    }
+
+    .input-prefix-wrap {
+        position: relative;
+    }
+
+        .input-prefix-wrap .prefix-symbol {
+            position: absolute;
+            left: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 0.95rem;
+            pointer-events: none;
+        }
+
+        .input-prefix-wrap .form-control {
+            padding-left: 28px;
+        }
+
+    .edit-badge {
+        display: inline-block;
+        background: #fff3cd;
+        color: #856404;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        border: 1px solid #ffc107;
+        margin-bottom: 16px;
+        letter-spacing: 0.03em;
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid #f0f0f0;
+    }
+
+    .btn-cancel {
+        padding: 10px 26px;
+        border-radius: 7px;
+        border: 1.5px solid #ccc;
+        background: #fff;
+        color: #555;
+        font-size: 0.93rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background 0.15s, border-color 0.15s;
+        display: inline-block;
+    }
+
+        .btn-cancel:hover {
+            background: #f5f5f5;
+            border-color: #aaa;
+            color: #333;
+            text-decoration: none;
+        }
+
+    .btn-save {
+        padding: 10px 36px;
+        border-radius: 7px;
+        border: none;
+        background: #0d6efd;
+        color: #fff;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.15s;
+    }
+
+        .btn-save:hover {
+            background: #0b5ed7;
+        }
+</style>
+
+<div class="product-form-card">
+
+    <h2>Edit Product</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Id)
+
+        @Html.ValidationSummary(true, "", new
+        {
+            @class = "alert alert-danger",
+            style = "margin-top:16px; font-size:0.88rem;"
+        })
+
+        <div class="form-section-header" style="margin-top:20px;">
+            <span class="edit-badge">✏️ Editing: #@Model.Id</span>
+            <h5>Update Product Details</h5>
+            <p>Modify product information and save your changes</p>
+        </div>
+
+        <!-- NAME (full width) -->
+        <div class="field-group">
+            <label>Product Name</label>
+            @Html.TextBoxFor(m => m.Name, new
+            {
+                @class = "form-control",
+                placeholder = "e.g. Office Chair",
+                autocomplete = "off"
+            })
+            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "field-error" })
+        </div>
+
+        <!-- price and stock together  -->
+        <div class="fields-row">
+
+            <div class="field-group">
+                <label>Price</label>
+                <div class="input-prefix-wrap">
+                    <span class="prefix-symbol">€</span>
+                    @Html.TextBoxFor(m => m.Price, new
+                    {
+                        @class = "form-control",
+                        type = "number",
+                        step = "0.01",
+                        min = "0.01",
+                        placeholder = "0.00"
+                    })
+                </div>
+                @Html.ValidationMessageFor(m => m.Price, "", new { @class = "field-error" })
+            </div>
+
+            <div class="field-group">
+                <label>Stock Quantity</label>
+                @Html.TextBoxFor(m => m.Stock, new
+                {
+                    @class = "form-control",
+                    type = "number",
+                    min = "0",
+                    placeholder = "0"
+                })
+                <span class="field-hint">Units available in warehouse</span>
+                @Html.ValidationMessageFor(m => m.Stock, "", new { @class = "field-error" })
+            </div>
+
+        </div>
+
+        <!-- action buttonss -->
+        <div class="form-actions">
+            <a href="/ProductMvc" class="btn-cancel">Cancel</a>
+            <button type="submit" class="btn-save">Save Changes</button>
+        </div>
+    }
+
+</div>

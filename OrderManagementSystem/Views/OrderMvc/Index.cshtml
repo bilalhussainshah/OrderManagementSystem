@@ -1,0 +1,196 @@
+﻿@model List<OrderManagementSystem.Models.DTOs.OrderDto>
+
+@{
+    ViewBag.Title = "Orders";
+}
+
+<style>
+    .index-container {
+        max-width: 960px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    .index-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+    }
+
+        .index-header h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin: 0;
+        }
+
+    .btn-add {
+        padding: 9px 22px;
+        border-radius: 8px;
+        border: none;
+        background: #0d6efd;
+        color: #fff;
+        font-size: 0.92rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background 0.15s;
+        display: inline-block;
+    }
+
+        .btn-add:hover {
+            background: #0b5ed7;
+            color: #fff;
+            text-decoration: none;
+        }
+
+    .data-card {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+        overflow: hidden;
+    }
+
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.93rem;
+    }
+
+        .data-table thead tr {
+            background: #f8fafc;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .data-table th {
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .data-table tbody tr {
+            border-bottom: 1px solid #f3f4f6;
+            transition: background 0.12s;
+        }
+
+            .data-table tbody tr:last-child {
+                border-bottom: none;
+            }
+
+            .data-table tbody tr:hover {
+                background: #f9fafb;
+            }
+
+        .data-table td {
+            padding: 13px 16px;
+            color: #374151;
+            vertical-align: middle;
+        }
+
+    .order-id-chip {
+        display: inline-block;
+        background: #ede9fe;
+        color: #5b21b6;
+        border-radius: 6px;
+        padding: 3px 10px;
+        font-size: 0.82rem;
+        font-weight: 700;
+    }
+
+    .total-text {
+        font-weight: 700;
+        color: #16a34a;
+        font-size: 0.97rem;
+    }
+
+    .date-text {
+        color: #6b7280;
+        font-size: 0.88rem;
+    }
+
+    .btn-tbl {
+        padding: 5px 14px;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+        transition: opacity 0.15s;
+        background: #cff4fc;
+        color: #055160;
+    }
+
+        .btn-tbl:hover {
+            opacity: 0.85;
+            text-decoration: none;
+            color: #055160;
+        }
+
+    .empty-state {
+        padding: 48px 20px;
+        text-align: center;
+        color: #9ca3af;
+        font-size: 0.95rem;
+    }
+
+        .empty-state .empty-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+</style>
+
+<div class="index-container">
+
+    <div class="index-header">
+        <h2>🧾 Orders</h2>
+        <a href="/OrderMvc/Create" class="btn-add">+ New Order</a>
+    </div>
+
+    <div class="data-card">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Order</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th style="width:110px;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Count > 0)
+                {
+                    foreach (var order in Model)
+                    {
+                        <tr>
+                            <td><span class="order-id-chip">#@order.Id</span></td>
+                            <td><strong>@order.CustomerName</strong></td>
+                            <td><span class="date-text">@order.OrderDate.ToString("dd MMM yyyy")</span></td>
+                            <td><span class="total-text">€ @order.Total.ToString("F2")</span></td>
+                            <td>
+                                @Html.ActionLink("Details", "Details", new { id = order.Id }, new { @class = "btn-tbl" })
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5">
+                            <div class="empty-state">
+                                <div class="empty-icon">🧾</div>
+                                <div>No orders yet</div>
+                                <a href="/OrderMvc/Create" style="color:#6366f1; font-weight:600;">Create your first order →</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

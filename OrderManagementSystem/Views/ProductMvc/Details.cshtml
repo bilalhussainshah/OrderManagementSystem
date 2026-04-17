@@ -1,0 +1,219 @@
+﻿@model OrderManagementSystem.Models.DTOs.ProductDto
+
+@{
+    ViewBag.Title = "Product Details";
+}
+
+<style>
+    .detail-card {
+        max-width: 580px;
+        margin: 48px auto;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+        padding: 40px 48px 36px 48px;
+    }
+
+        .detail-card h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            text-align: center;
+            color: #1a1a2e;
+            margin-bottom: 6px;
+        }
+
+    .detail-section-header {
+        border-bottom: 1px solid #f0f0f0;
+        padding-bottom: 14px;
+        margin-bottom: 28px;
+        margin-top: 20px;
+    }
+
+        .detail-section-header h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 3px;
+            color: #333;
+        }
+
+        .detail-section-header p {
+            font-size: 0.85rem;
+            color: #888;
+            margin: 0;
+        }
+
+    .product-icon-wrap {
+        width: 64px;
+        height: 64px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #f093fb, #f5576c);
+        color: #fff;
+        font-size: 1.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px auto;
+    }
+
+    .detail-row {
+        display: flex;
+        align-items: flex-start;
+        padding: 14px 0;
+        border-bottom: 1px solid #f7f7f7;
+        gap: 16px;
+    }
+
+        .detail-row:last-of-type {
+            border-bottom: none;
+        }
+
+    .detail-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    .icon-pink {
+        background: #fff0f3;
+        color: #e11d48;
+    }
+
+    .icon-green {
+        background: #e8faf0;
+        color: #16a34a;
+    }
+
+    .icon-amber {
+        background: #fffbeb;
+        color: #d97706;
+    }
+
+    .detail-content {
+        flex: 1;
+    }
+
+    .detail-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #9ca3af;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 3px;
+    }
+
+    .detail-value {
+        font-size: 0.97rem;
+        color: #1f2937;
+        font-weight: 500;
+    }
+
+    .stock-badge {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 0.82rem;
+        font-weight: 600;
+    }
+
+    .stock-ok {
+        background: #dcfce7;
+        color: #15803d;
+    }
+
+    .stock-low {
+        background: #fff7ed;
+        color: #c2410c;
+    }
+
+    .stock-out {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+
+    .detail-actions {
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid #f0f0f0;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .btn-back {
+        padding: 10px 26px;
+        border-radius: 7px;
+        border: 1.5px solid #ccc;
+        background: #fff;
+        color: #555;
+        font-size: 0.93rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background 0.15s, border-color 0.15s;
+        display: inline-block;
+    }
+
+        .btn-back:hover {
+            background: #f5f5f5;
+            border-color: #aaa;
+            color: #333;
+            text-decoration: none;
+        }
+</style>
+
+<div class="detail-card">
+
+    <div class="product-icon-wrap">📦</div>
+
+    <h2>@Model.Name</h2>
+
+    <div class="detail-section-header">
+        <h5>Product Information</h5>
+        <p>Full details for this product</p>
+    </div>
+
+    <div class="detail-row">
+        <div class="detail-icon icon-pink">🏷️</div>
+        <div class="detail-content">
+            <div class="detail-label">Product Name</div>
+            <div class="detail-value">@Model.Name</div>
+        </div>
+    </div>
+
+    <div class="detail-row">
+        <div class="detail-icon icon-green">💶</div>
+        <div class="detail-content">
+            <div class="detail-label">Unit Price</div>
+            <div class="detail-value">€ @Model.Price.ToString("F2")</div>
+        </div>
+    </div>
+
+    <div class="detail-row">
+        <div class="detail-icon icon-amber">🏪</div>
+        <div class="detail-content">
+            <div class="detail-label">Stock Quantity</div>
+            <div class="detail-value">
+                @if (Model.StockQuantity <= 0)
+                {
+                    <span class="stock-badge stock-out">Out of stock</span>
+                }
+                else if (Model.StockQuantity <= 10)
+                {
+                    <span class="stock-badge stock-low">⚠️ Low — @Model.StockQuantity units</span>
+                }
+                else
+                {
+                    <span class="stock-badge stock-ok">✔ @Model.StockQuantity units available</span>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-actions">
+        <a href="/ProductMvc" class="btn-back">← Back to Products</a>
+    </div>
+
+</div>
