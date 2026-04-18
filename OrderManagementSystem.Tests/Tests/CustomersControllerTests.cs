@@ -28,9 +28,7 @@ namespace OrderManagementSystem.Tests.Tests
             _controller.Configuration = new HttpConfiguration();
         }
 
-        // =============================================
         // GET ALL CUSTOMERS
-        // =============================================
 
         [TestMethod]
         public async Task GetCustomers_ReturnsAllCustomers()
@@ -62,9 +60,7 @@ namespace OrderManagementSystem.Tests.Tests
             Assert.AreEqual(0, result.Content.Count);
         }
 
-        // =============================================
         // GET CUSTOMER BY ID
-        // =============================================
 
         [TestMethod]
         public async Task GetCustomer_ExistingId_ReturnsCustomer()
@@ -92,9 +88,7 @@ namespace OrderManagementSystem.Tests.Tests
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
         }
 
-        // =============================================
         // POST (CREATE) CUSTOMER
-        // =============================================
 
         [TestMethod]
         public async Task PostCustomer_ValidData_ReturnsOk()
@@ -134,9 +128,7 @@ namespace OrderManagementSystem.Tests.Tests
             Assert.IsInstanceOfType(result, typeof(BadRequestErrorMessageResult));
         }
 
-        // =============================================
         // PUT (UPDATE) CUSTOMER
-        // =============================================
 
         [TestMethod]
         public async Task PutCustomer_ValidUpdate_ReturnsOk()
@@ -178,9 +170,7 @@ namespace OrderManagementSystem.Tests.Tests
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
         }
 
-        // =============================================
         // DELETE CUSTOMER
-        // =============================================
 
         [TestMethod]
         public async Task DeleteCustomer_ExistingWithNoOrders_ReturnsOk()

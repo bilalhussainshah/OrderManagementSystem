@@ -27,9 +27,7 @@ namespace OrderManagementSystem.Tests.Tests
             _controller.Configuration = new HttpConfiguration();
         }
 
-        // =============================================
         // GET ALL ORDERS
-        // =============================================
 
         [TestMethod]
         public async Task GetOrders_ReturnsAllOrders()
@@ -58,9 +56,7 @@ namespace OrderManagementSystem.Tests.Tests
             Assert.AreEqual(20m, result.Content[0].Total);
         }
 
-        // =============================================
         // GET ORDER BY ID
-        // =============================================
 
         [TestMethod]
         public async Task GetOrder_ExistingId_ReturnsOrderDetail()
@@ -101,9 +97,7 @@ namespace OrderManagementSystem.Tests.Tests
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
         }
 
-        // =============================================
         // POST (CREATE) ORDER
-        // =============================================
 
         [TestMethod]
         public async Task CreateOrder_NullModel_ReturnsBadRequest()

@@ -27,9 +27,8 @@ namespace OrderManagementSystem.Tests.Tests
             _controller.Configuration = new HttpConfiguration();
         }
 
-        // =============================================
+        
         // GET ALL PRODUCTS
-        // =============================================
 
         [TestMethod]
         public async Task GetProducts_ReturnsAllProducts()
@@ -47,9 +46,7 @@ namespace OrderManagementSystem.Tests.Tests
             Assert.AreEqual(2, result.Content.Count);
         }
 
-        // =============================================
         // GET PRODUCT BY ID
-        // =============================================
 
         [TestMethod]
         public async Task GetProduct_ExistingId_ReturnsProduct()
@@ -77,9 +74,7 @@ namespace OrderManagementSystem.Tests.Tests
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
         }
 
-        // =============================================
         // POST (CREATE) PRODUCT
-        // =============================================
 
         [TestMethod]
         public async Task PostProduct_ValidData_ReturnsOk()
@@ -123,9 +118,7 @@ namespace OrderManagementSystem.Tests.Tests
             Assert.IsInstanceOfType(result, typeof(BadRequestErrorMessageResult));
         }
 
-        // =============================================
         // PUT (UPDATE) PRODUCT
-        // =============================================
 
         [TestMethod]
         public async Task PutProduct_ValidUpdate_ReturnsOk()
@@ -164,9 +157,7 @@ namespace OrderManagementSystem.Tests.Tests
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
         }
 
-        // =============================================
         // DELETE PRODUCT
-        // =============================================
 
         [TestMethod]
         public async Task DeleteProduct_ExistingNotInOrders_ReturnsOk()
